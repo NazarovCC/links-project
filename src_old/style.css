@@ -1,0 +1,50 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: #87CEEB;
+}
+
+strong,
+.bold {
+    font-weight: 500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+    line-height: 1.45;
+}
+h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.65rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #eaecef;
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+p,
+ul {
+    line-height: 1.7;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.center-auto{
+  text-align:center;
+}
+.mt_20{
+  margin-top: 20px;
+}
+

@@ -42,23 +42,22 @@ export default {
    setup(props){
      const store = useStore()
      const onelink = ref(props.link)
-     const favBuff = ref(false)
      const deleteLink = async()=>{
-        await store.dispatch('linkStore/remove',onelink.value.id)
+        await store.dispatch('linkStore/remove',props.link.id)
 
      }
      const updateReading = async()=>{
        onelink.value.isReading= true
-       await store.dispatch('linkStore/onUpdated',onelink.value)
+       await store.dispatch('linkStore/onUpdated',props.link)
 
      }
      const willFavorice = async()=>{
        onelink.value.isFavorice= true
-       await store.dispatch('linkStore/onUpdatedFav',onelink.value)
+       await store.dispatch('linkStore/onUpdatedFav',props.link)
      }
       const wasFavorice = async()=>{
        onelink.value.isFavorice= false
-       await store.dispatch('linkStore/onUpdatedNoFav',onelink.value)
+       await store.dispatch('linkStore/onUpdatedNoFav',props.link)
 
      }
      const date = computed(()=>new Date(onelink.value.date).toLocaleString())
@@ -69,7 +68,6 @@ export default {
        wasFavorice,
        onelink,
        date,
-       favBuff
      }
    },
    components:{NCard, NButton, NIcon}

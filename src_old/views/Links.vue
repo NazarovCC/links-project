@@ -1,7 +1,7 @@
 <template>
 
    <h2>Мои ссылочки</h2>
-   <h3 v-if="links.lenght!==0">Сортировка</h3>
+   <h3>Сортировка</h3>
    <n-select v-model:value="value" :options="options"></n-select>
   <n-spin v-if="isLoading" size="large" />
    <app-all-link :links="links">
