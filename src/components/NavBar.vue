@@ -50,9 +50,6 @@ export default {
      justify-content: space-between;
 
    }
-   .icon_main{
-
-   }
    .buttons_section{
      display: flex;
      justify-content: space-between;

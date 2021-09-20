@@ -1,7 +1,7 @@
 <template>
 
      <n-card
-     :title="onelink.date"
+     :title="date"
      :class="['mt_20',{'reading': onelink.isReading
 
      }]">
@@ -32,7 +32,7 @@
 <script>
 import {NCard, NButton, NIcon} from 'naive-ui'
 import {useStore} from 'vuex'
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 export default {
    props:{
      link:{
@@ -42,6 +42,7 @@ export default {
    setup(props){
      const store = useStore()
      const onelink = ref(props.link)
+     const favBuff = ref(false)
      const deleteLink = async()=>{
         await store.dispatch('linkStore/remove',props.link.id)
 
@@ -54,20 +55,21 @@ export default {
      const willFavorice = async()=>{
        onelink.value.isFavorice= true
        await store.dispatch('linkStore/onUpdatedFav',props.link)
-
      }
       const wasFavorice = async()=>{
        onelink.value.isFavorice= false
        await store.dispatch('linkStore/onUpdatedNoFav',props.link)
 
      }
-
+     const date = computed(()=>new Date(onelink.value.date).toLocaleString())
      return{
        deleteLink,
        updateReading,
        willFavorice,
        wasFavorice,
-       onelink
+       onelink,
+       date,
+       favBuff
      }
    },
    components:{NCard, NButton, NIcon}

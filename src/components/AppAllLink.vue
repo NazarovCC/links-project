@@ -1,12 +1,18 @@
 <template>
-  <app-link v-for="link in links" :key="link.id" :link="link"></app-link>
-  <h3 v-if="links.length === 0">Нет подходящих ссылок</h3>
+
+  <div v-if="links">
+     <transition-group name="app-all-link">
+      <app-link  v-for="link in links" :key="link.id" :link="link"></app-link>
+     </transition-group>
+  </div>
+  <h3 v-else>Нет подходящих ссылок</h3>
 </template>
 
 
 <script>
-//import { ref } from 'vue'
+// import { computed, ref,watch } from 'vue'
 // import {useStore} from 'vuex'
+// import {NSelect} from 'naive-ui'
 import AppLink from './AppLink'
 
 
@@ -15,17 +21,19 @@ export default {
    components:{
      AppLink,
 
+
    },
    props:['links'],
-  //  setup(props){
-  //    const allLinks = ref(props.links)
-  //    return {
-  //     allLinks
-  //    }
-  //  }
+
+
 
 
 
 
 }
 </script>
+<style scoped>
+.app-all-link-move {
+  transition: transform 0.4s ease;
+}
+</style>

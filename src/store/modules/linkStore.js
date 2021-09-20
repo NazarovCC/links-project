@@ -5,24 +5,28 @@ export default{
   namespaced: true,
   state(){
     return{
-      links:[]
+      links:[],
+      sortValue: '',
     }
   },
   getters:{
-    allLinks(state){
-      return state.links
+    getSortValue(state){
+      return state.sortValue
     },
-    dateSortLinks(state, value){
-      return state.links.sort((next,prev)=>next[value]-prev[value])
+    sortLinks(state,getters){
+      let value = getters.getSortValue
+      if (value){
+        return state.links.sort((next,prev)=>next[value]-prev[value])
+      }
+      return state.links
+
     },
     favoriceLinks(state){
        return state.links.filter(link=>link.isFavorice === true)
-    }
+    },
   },
   mutations:{
      addLink(state,link){
-      //  link['id'] = Date.now()
-
        state.links.push(link)
      },
      setLink(state,links){
@@ -42,12 +46,15 @@ export default{
     },
     deleteLink(state, id){
       state.links = state.links.filter(link=>link.id !== id)
+    },
+    changeSortValue(state,value){
+      state.sortValue = value
     }
   },
   actions:{
     async create({commit, dispatch}, payload){
       try{
-        payload['date'] = new Date(Date.now()).toLocaleString()
+        payload['date'] = Date.now()//new Date(Date.now()).toLocaleString()
         payload['isReading'] = false
         payload['isFavorice'] = false
         const {data} = await axios.post('/links.json',payload)
